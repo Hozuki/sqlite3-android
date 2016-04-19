@@ -1,3 +1,6 @@
+#APP_ABI := all
+#APP_PLATFORM := android-19
+
 LOCAL_PATH := $(call my-dir)
 
 

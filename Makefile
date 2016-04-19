@@ -1,11 +1,18 @@
 # http://www.sqlite.org/download.html
-SQLITE_VERSION  ?= 3080704
+SQLITE_YEAR     ?= 2016
+SQLITE_VERSION  ?= 3120100
 SQLITE_BASENAME := sqlite-amalgamation-$(SQLITE_VERSION)
-SQLITE_URL      := http://www.sqlite.org/2014/$(SQLITE_BASENAME).zip
+SQLITE_URL      := http://www.sqlite.org/$(SQLITE_YEAR)/$(SQLITE_BASENAME).zip
+
+# NDK parameters.
+NDK_BUILD_EXEC := ndk-build
+# http://www.cnblogs.com/rainduck/p/4177384.html
+APP_PLATFORM := android-19
+APP_ABI := all
 
 # Build/Compile
-libs/armeabi/sqlite3-static: build/sqlite3.c
-	ndk-build
+libs: build/sqlite3.c
+	$(NDK_BUILD_EXEC) APP_PLATFORM=$(APP_PLATFORM) APP_ABI=$(APP_ABI)
 
 # Unpack
 build/sqlite3.c: $(SQLITE_BASENAME).zip
